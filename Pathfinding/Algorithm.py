@@ -61,8 +61,8 @@ def Dijktra(grid:Map)->List[Tuple[int,int]]:
     if(dist_dict[target_cell.get_coordinates()]==inf):
         print("No Path")
         return []
-
-    path=[target_cell.get_coordinates()]
+    grid.set_cell_type(*target_cell.get_coordinates(),CellType.END)
+    path=[]
     cur=target_cell.get_coordinates()
 
     while prev[cur]!=None:

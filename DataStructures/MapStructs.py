@@ -14,6 +14,7 @@ class CellType(Enum):
     ROAD = 3
     START = 4
     PATH = 5
+    END = 6
 
 @dataclass
 class Cell:

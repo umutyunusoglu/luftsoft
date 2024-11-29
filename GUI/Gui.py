@@ -58,7 +58,7 @@ def draw_cursor_modes(screen,cell_size,top_left,cursor_modes):
 
     for mode,color in cursor_modes.items():
 
-        if(mode!=ds.CellType.PATH):
+        if(mode!=ds.CellType.PATH and mode!=ds.CellType.END):
 
             match mode:
 
@@ -149,11 +149,12 @@ def main_loop(screen_size=(800, 600),matrix_size=(10,10)):
 
 
     color_map={ ds.CellType.ROAD:(0,0,0),
-                ds.CellType.WALL:(15,0,255),
+                ds.CellType.WALL:(255,0,228),
                 ds.CellType.FULL:(255,45,0),
-                ds.CellType.EMPTY: (255, 255, 255),
+                ds.CellType.EMPTY: (58, 194, 10),
                 ds.CellType.START: (102,255,255),
-                ds.CellType.PATH: (153,51,255)}
+                ds.CellType.PATH: (153,51,255),
+                ds.CellType.END: (15,0,255),}
 
     menu_rects = {
         ds.CellType.ROAD: pygame.Rect(cursor_mode_top_left[0],
@@ -175,6 +176,8 @@ def main_loop(screen_size=(800, 600),matrix_size=(10,10)):
         ds.CellType.START: pygame.Rect(cursor_mode_top_left[0]+cursor_mode_size*4,
                                 cursor_mode_top_left[1],
                                 cursor_mode_size, cursor_mode_size),
+
+
 
         "Run": pygame.Rect(start_top_left[0],start_top_left[1],start_size,start_size),
         "Clear": pygame.Rect(clear_top_left[0],clear_top_left[1],clear_size,clear_size)
@@ -211,6 +214,7 @@ def main_loop(screen_size=(800, 600),matrix_size=(10,10)):
 
                             for cell in path:
                                 map.set_cell_type(cell[0],cell[1],ds.CellType.PATH)
+
 
                         elif(key=="Clear"):
                             map.reset_cells()
